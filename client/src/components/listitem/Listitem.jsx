@@ -18,12 +18,16 @@ export default function Listitem({ index, item }) {
 
     const getMovie = async () => {
       try {
-        const res = await axios.get("/movies/find/" + item, {
-          headers: {
-            token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-          },
-        });
+        const res = await axios.get(
+          "https://netflix-clone-ces1.onrender.com/movies/find/" + item,
+          {
+            headers: {
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
+            },
+          }
+        );
         setMovie(res.data);
       } catch (error) {
         console.log("Error fetching movie:", error);

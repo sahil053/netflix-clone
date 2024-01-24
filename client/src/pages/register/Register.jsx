@@ -23,11 +23,14 @@ export default function Register() {
     setPassword(passwordRef.current.value);
     setUsername(usernameRef.current.value);
     try {
-      const response = await axios.post("auth/register", {
-        email,
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://netflix-clone-ces1.onrender.com/auth/register",
+        {
+          email,
+          username,
+          password,
+        }
+      );
       console.log("Registration successful:", response.data);
       navigate("/login");
     } catch (error) {
