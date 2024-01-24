@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+    flex:4;
+}
+
+.link{
+    text-decoration: none;
+    color: inherit;
+}
