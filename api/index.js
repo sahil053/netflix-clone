@@ -17,22 +17,30 @@ mongoose
   .then(() => console.log("DB Connected"))
   .catch((err) => console.log(err));
 
-app.use(express.json());
-
-// CORS setup
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
     "https://netflix-clone053.netlify.app"
   );
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.setHeader("Access-Control-Allow-Credentials", "true");
-  next();
+
+  // Continue to the next middleware for non-OPTIONS requests
+  if (req.method === "OPTIONS") {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
 });
+
+app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
