@@ -24,7 +24,7 @@ export default function Register() {
     setUsername(usernameRef.current.value);
     try {
       const response = await axios.post(
-        "https://netflix-clone-ces1.onrender.com/auth/register",
+        "https://netflix-clone-ces1.onrender.com/api/auth/register",
         {
           email,
           username,

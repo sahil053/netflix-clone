@@ -12,7 +12,7 @@ export default function Featured({ type, setGenre }) {
     const getRandomContent = async () => {
       try {
         const res = await axios.get(
-          `https://netflix-clone-ces1.onrender.com/movies/random?type=${type}/`,
+          `https://netflix-clone-ces1.onrender.com/api/movies/random?type=${type}/`,
           {
             headers: {
               token:

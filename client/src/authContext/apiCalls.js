@@ -5,7 +5,7 @@ export const login = async (user, dispatch) => {
   dispatch(loginStart());
   try {
     const res = await axios.post(
-      "https://netflix-clone-ces1.onrender.com/auth/login",
+      "https://netflix-clone-ces1.onrender.com/api/auth/login",
       user
     );
     dispatch(loginSuccess(res.data));

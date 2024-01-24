@@ -19,7 +19,7 @@ export default function Listitem({ index, item }) {
     const getMovie = async () => {
       try {
         const res = await axios.get(
-          "https://netflix-clone-ces1.onrender.com/movies/find/" + item,
+          "https://netflix-clone-ces1.onrender.com/api/movies/find/" + item,
           {
             headers: {
               token:
