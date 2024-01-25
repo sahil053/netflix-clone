@@ -20,7 +20,8 @@ mongoose
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://netflix-clone053.netlify.app"
+    "https://netflix-clone053.netlify.app",
+    "https://admin-dashboard053.netlify.app"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
