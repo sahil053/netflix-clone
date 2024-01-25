@@ -18,10 +18,15 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://netflix-clone053.netlify.app, https://admin-dashboard053.netlify.app, https://admin-dashboard-o430.onrender.com"
-  );
+  const allowedOrigins = [
+    "https://netflix-clone053.netlify.app",
+    "https://admin-dashboard053.netlify.app",
+    "https://admin-dashboard-o430.onrender.com",
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS"
