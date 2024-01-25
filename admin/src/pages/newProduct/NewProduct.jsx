@@ -29,7 +29,10 @@ export default function NewProduct() {
       items.map(async (item) => {
         const timestamp = new Date().getTime();
         const uniqueFileName = `${timestamp}_${item.file.name}`;
-        const storageRef = ref(storage, `/items/${uniqueFileName}`);
+        const storageRef = ref(
+          storage,
+          `https://netflix-clone-ces1.onrender.com/api/items/${uniqueFileName}`
+        );
         const uploadTask = uploadBytesResumable(storageRef, item.file);
 
         try {

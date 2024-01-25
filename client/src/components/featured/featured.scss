@@ -72,6 +72,9 @@
         &.play {
           background-color: white;
           color: var(--main-color);
+          a &.play {
+            color: var(--main-color);
+          }
         }
 
         &.more {

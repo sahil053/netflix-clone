@@ -35,7 +35,7 @@ export default function ListList() {
           <>
             <Link
               to={{
-                pathname: `/list/${params.row._id}`,
+                pathname: `https://netflix-clone-ces1.onrender.com/api/list/${params.row._id}`,
                 state: params.row,
               }}
             >

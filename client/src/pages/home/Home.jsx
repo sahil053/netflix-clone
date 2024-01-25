@@ -12,10 +12,11 @@ const Home = ({ type }) => {
   useEffect(() => {
     const getRandomLists = async () => {
       try {
-        const apiUrl = `lists${type ? "?type=" + type : ""}${
-          genre ? "&genre=" + genre : ""
-        }`;
-        // console.log("API URL:", apiUrl);
+        const apiUrl = `https://netflix-clone-ces1.onrender.com/api/lists${
+          type ? "?type=" + type : ""
+        }${genre ? "&genre=" + genre : ""}`;
+
+        console.log("API URL:", apiUrl);
 
         const res = await axios.get(apiUrl, {
           headers: {
@@ -23,9 +24,13 @@ const Home = ({ type }) => {
               "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
+
+        console.log("Data from server:", res.data);
+
         setLists(res.data);
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching lists:", error);
+        // Handle the error, show a user-friendly message, or take appropriate action.
       }
     };
 

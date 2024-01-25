@@ -49,6 +49,10 @@ app.use("/api/lists", listRoute);
 
 const port = process.env.PORT || 8800;
 
+app.get("/", (req, res) => {
+  res.send("hello world!!!");
+});
+
 app.listen(port, () => {
   console.log(`Backend service is running on port ${port}`);
 });

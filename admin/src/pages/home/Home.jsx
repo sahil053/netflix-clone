@@ -31,12 +31,16 @@ export default function Home() {
   useEffect(() => {
     const getStats = async () => {
       try {
-        const res = await axios.get("/users/stats", {
-          headers: {
-            token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YTdkYWU2ZjExY2M4Y2E4Yjg4Y2U0NCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTQ5OTg4MywiZXhwIjoxNzA1OTMxODgzfQ.5ORjd9t-S-KWAsB1WFZMzUwkQajguzY-nnHRWf5kbIo",
-          },
-        });
+        const res = await axios.get(
+          "https://netflix-clone-ces1.onrender.com/api/users/stats",
+          {
+            headers: {
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
+            },
+          }
+        );
         const statsList = res.data.sort(function (a, b) {
           return a._id - b._id;
         });

@@ -49,7 +49,7 @@ export default function ProductList() {
           <>
             <Link
               to={{
-                pathname: `/product/${params.row._id}`, //{+ params.row._id},
+                pathname: `https://netflix-clone-ces1.onrender.com/api/product/${params.row._id}`, //{+ params.row._id},
                 state: params.row,
               }}
             >

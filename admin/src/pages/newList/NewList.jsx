@@ -36,7 +36,7 @@ export default function NewList() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     createList(list, dispatch);
-    history("/lists");
+    history("https://netflix-clone-ces1.onrender.com/api/lists");
   };
 
   return (
