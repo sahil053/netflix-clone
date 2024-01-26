@@ -10,7 +10,7 @@ dotenv.config();
 app.use(express.json());
 
 // CORS middleware
-app.use((req, res, next) => {
+app.use(function (req, res, next) {
   const allowedOrigins = [
     "http://localhost:4000",
     "https://netflix-clone053.netlify.app",
@@ -24,55 +24,20 @@ app.use((req, res, next) => {
   }
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+    "GET,HEAD,PUT,PATCH,POST,DELETE"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization, token"
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
   );
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader("Access-Control-Allow-Private-Network", true);
-  // Set the Access-Control-Max-Age header
-  res.setHeader("Access-Control-Max-Age", 7200);
   next();
 });
 
-// Preflight handling for OPTIONS requests
+// Handle OPTIONS requests
 app.options("*", (req, res) => {
-  // Check if the request is valid
-  if (
-    req.headers.origin &&
-    (req.headers.origin.includes("https://netflix-clone053.netlify.app") ||
-      req.headers.origin.includes(
-        "https://admin-dashboard-o430.onrender.com"
-      ) ||
-      req.headers.origin.includes("https://admin-dashboard053.netlify.app")) &&
-    [
-      "GET",
-      "HEAD",
-      "PUT",
-      "PATCH",
-      "POST",
-      "DELETE",
-      "OPTIONS",
-      "CONNECT",
-      "TRACE",
-    ].includes(req.headers["access-control-request-method"]) &&
-    [
-      "Origin",
-      "X-Requested-With",
-      "Content-Type",
-      "Accept",
-      "Authorization",
-      "token",
-    ].every((header) =>
-      req.headers["access-control-request-headers"].includes(header)
-    )
-  ) {
-    return res.sendStatus(204); // Successful preflight response
-  } else {
-    return res.sendStatus(403); // Forbidden
-  }
+  res.status(200).end();
 });
 
 // Routes
