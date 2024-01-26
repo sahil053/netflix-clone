@@ -10,8 +10,7 @@ dotenv.config();
 app.use(express.json());
 
 // CORS middleware
-app.use(function (req, res, next) {
-  // res.header("Access-Control-Allow-Origin", "*");
+app.use((req, res, next) => {
   const allowedOrigins = [
     "http://localhost:4000",
     "https://netflix-clone053.netlify.app",
@@ -23,13 +22,57 @@ app.use(function (req, res, next) {
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
-  res.header(
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization, token"
   );
-  res.header("Access-Control-Allow-credentials", true);
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+  // Set the Access-Control-Max-Age header
+  res.setHeader("Access-Control-Max-Age", 7200);
   next();
+});
+
+// Preflight handling for OPTIONS requests
+app.options("*", (req, res) => {
+  // Check if the request is valid
+  if (
+    req.headers.origin &&
+    (req.headers.origin.includes("https://netflix-clone053.netlify.app") ||
+      req.headers.origin.includes(
+        "https://admin-dashboard-o430.onrender.com"
+      ) ||
+      req.headers.origin.includes("https://admin-dashboard053.netlify.app")) &&
+    [
+      "GET",
+      "HEAD",
+      "PUT",
+      "PATCH",
+      "POST",
+      "DELETE",
+      "OPTIONS",
+      "CONNECT",
+      "TRACE",
+    ].includes(req.headers["access-control-request-method"]) &&
+    [
+      "Origin",
+      "X-Requested-With",
+      "Content-Type",
+      "Accept",
+      "Authorization",
+      "token",
+    ].every((header) =>
+      req.headers["access-control-request-headers"].includes(header)
+    )
+  ) {
+    return res.sendStatus(204); // Successful preflight response
+  } else {
+    return res.sendStatus(403); // Forbidden
+  }
 });
 
 // Routes
@@ -51,6 +94,12 @@ mongoose
   })
   .then(() => console.log("DB Connected"))
   .catch((err) => console.log(err));
+
+// Health check route
+app.get("/healthz", (req, res) => {
+  console.log("Health check is processed");
+  return res.sendStatus(204);
+});
 
 // Server setup
 const port = process.env.PORT || 8800;
