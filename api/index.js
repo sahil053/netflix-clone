@@ -14,10 +14,10 @@ app.use(function (req, res, next) {
   // res.header("Access-Control-Allow-Origin", "*");
   const allowedOrigins = [
     "http://localhost:4000",
-    "https://netflix-clone053.netlify.app/",
-    "https://admin-dashboard-o430.onrender.com/",
-    "https://admin-dashboard053.netlify.app/",
-    "https://reliable-cucurucho-e36724.netlify.app/",
+    "https://netflix-clone053.netlify.app",
+    "https://admin-dashboard-o430.onrender.com",
+    "https://admin-dashboard053.netlify.app",
+    "https://reliable-cucurucho-e36724.netlify.app",
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
