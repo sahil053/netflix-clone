@@ -36,7 +36,8 @@ export default function Home() {
           {
             headers: {
               token:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YTdkYWU2ZjExY2M4Y2E4Yjg4Y2U0NCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTQ5OTg4MywiZXhwIjoxNzA1OTMxODgzfQ.5ORjd9t-S-KWAsB1WFZMzUwkQajguzY-nnHRWf5kbIo",
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
             },
           }
         );
